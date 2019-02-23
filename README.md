@@ -1,1 +1,0 @@
-# BHAX_feladatok
