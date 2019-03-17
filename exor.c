@@ -1,4 +1,5 @@
-time ./t <titkos.szoveg#define MAX_TITKOS 50000
+time ./t <titkos.szoveg>
+#define MAX_TITKOS 50000
 #define OLVASAS_BUFFER 1024
 #define KULCS_MERET 8
 #define _GNU_SOURCE
