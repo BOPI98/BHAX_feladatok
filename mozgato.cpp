@@ -1,8 +1,12 @@
+/*
 Ebben a programban a mozgatókonstruktorral úgy épül fel a program, 
 hogy mikor elindul a program akkor lemásilja a kódot és azután fut le a binfa. 
+A mozgatókonstruktor algoritmusa a binfa osztályába kerül be ahol a fa alakját veszi fel.
+A program többi része ugyan úgy működik, mint az előző feladatokban.
+*/
 
-
-#include <iostream>		#include <cmath>		
+#include <iostream>		
+#include <cmath>		
 
 #include <fstream>		
 
