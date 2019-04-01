@@ -1,3 +1,6 @@
+Ebben a programban a mozgatókonstruktorral úgy épül fel a program, hogy mikor elindul a program akkor lemásilja a kódot és azután fut le a binfa. 
+
+
 #include <iostream>		#include <cmath>		
 
 #include <fstream>		
