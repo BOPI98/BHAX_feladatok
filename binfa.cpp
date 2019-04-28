@@ -1,423 +1,211 @@
 
 #include <iostream>
-#include <cmath>
-#include <fstream>
-#include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <string.h>
 
-using namespace std;
+#define null NULL
 
-class LZWBinFa
+class Binfa
 {
-public:
-	LZWBinFa ():fa(&gyoker){
-		//kiirCsom(*fa);
-	}
-	~LZWBinFa ()
+private:
+	class Node
 	{
-		szabadit (gyoker.egyesGyermek());
-		szabadit(gyoker.nullasGyermek());
-	}
-
-
-	void operator<<(char b)
-	{
-		
-		if(b == '0')
+	public:
+		Node(char c='/')
 		{
-			if(!(fa->balNulla))
+			this->c=c;
+			this->left = null;
+			this->right = null;
+		}
+		char c;
+		Node* left;
+		Node* right;
+	};
+	Node* fa;
+	
+
+public:
+	Binfa(): fa(&gyoker)
+	{
+
+	}
+	
+	void operator<<(char c)
+	{
+		if(c=='0')
+		{
+			if(fa->left == null)
 			{
-				Csomopont *uj = new Csomopont('0');
-				fa->ujNullasGyermek(uj);
+				fa->left = new Node('0');
 				fa = &gyoker;
 			}
 			else
 			{
-				fa = fa->nullasGyermek();
+				fa = fa->left;
 			}
 		}
 		else
 		{
-			if(!fa->egyesGyermek())
+			if(fa->right == null)
 			{
-				Csomopont *uj= new Csomopont('1');
-				fa->ujEgyesGyermek(uj);
+				fa->right = new Node('1');
 				fa = &gyoker;
 			}
 			else
 			{
-				fa = fa->egyesGyermek();
+				fa = fa->right;
 			}
 		}
 	}
-
-
-	void kiir (void)
-	{
-		melyseg = 0;
-		kiirIn(&gyoker, std::cout);
-	}
-
-	int getMelyseg(void);
-	double getAtlag(void);
-	double getSzoras(void);
-
-	//std::ostream << 'valami';
-
-	friend std::ostream & operator<< (std::ostream & os, LZWBinFa & bf)
-	{
-		bf.kiir(os);
-		return os;
-	}
-
-	void kiir(std::ostream & os)
-	{
-		melyseg = 0;
-		kiirIn(&gyoker, os);
-	}
-
-LZWBinFa & operator= (const LZWBinFa & lzw){
-		std::cout << "Másoló értékadás meghívódott" << std::endl;
-
-          gyoker.ujEgyesGyermek ( masol ( lzw.gyoker.egyesGyermek (), lzw.fa ) );
-          gyoker.ujNullasGyermek ( masol ( lzw.gyoker.nullasGyermek (), lzw.fa ) );
-
-          if ( lzw.fa == & ( lzw.gyoker ) )
-               fa = &gyoker;
-}
-
-
-
-private:
-	class Csomopont
-	{
-	public:
-
-		Csomopont(char b = '/'):betu(b), balNulla(0), jobbEgy(0){}
-		~Csomopont(){}
-
-
-		Csomopont * nullasGyermek() const
-		{
-			return balNulla;
-		}
-		Csomopont *egyesGyermek () const
-		{
-			return jobbEgy;
-		}
-		void ujNullasGyermek (Csomopont * gy)
-		{
-			balNulla = gy;
-		}
-		void ujEgyesGyermek(Csomopont * gy)
-		{
-			jobbEgy = gy;
-		}
-		char getBetu () const
-		{
-			return betu;
-		}
-		Csomopont *balNulla;
-		Csomopont *jobbEgy;
-	private:
-		char betu;
-		
-
-		//Csomopont (const Csomopont &); //int x = b;
-		//Csomopont & operator= (const Csomopont &); //x = b;
-	};
-
-	Csomopont *  masol ( Csomopont * cs, Csomopont * regifa ) {
-
-          Csomopont * ujelem = NULL;
-
-          if ( cs != NULL ) {
-               ujelem = new Csomopont ( cs->getBetu() );
-
-               ujelem->ujEgyesGyermek ( masol ( cs->egyesGyermek (), regifa ) );
-               ujelem->ujNullasGyermek ( masol ( cs->nullasGyermek (), regifa ) );
-
-               if ( regifa == cs )
-                    fa = ujelem;
-
-          }
-
-          return ujelem;
-     }
 	
-	Csomopont *fa;
-	int melyseg, atlagosszeg, atlagdb;
-	double szorasosszeg;
-
-	LZWBinFa (const LZWBinFa &);
-	//LZWBinFa & operator= (const LZWBinFa &);
-
-	//in-order kiíratás
-	void kiirIn (Csomopont * elem, std::ostream & os)
+	void preorder(Node* elem,int depth=0)
 	{
-		if(elem != NULL)
+		if(elem==null)
 		{
-			++melyseg;
-			kiirIn(elem->egyesGyermek(), os);
-			for(int i = 0;i < melyseg  ;++i)
-				os << "---";
-			os << elem->getBetu() << "(" << melyseg - 1 << ")" << std::endl;
-			kiirIn(elem->nullasGyermek(), os);
-			--melyseg;
+			return;
 		}
-	}
-
-	//post-order kíratás
-	void kiirPost (Csomopont * elem, std::ostream & os)
-	{
-		if(elem != NULL)
+		if(depth) 
 		{
-			++melyseg;
-			kiirPost(elem->egyesGyermek (), os);
-			kiirPost(elem->nullasGyermek (), os);
-			for(int i = 0;i < melyseg; ++i)
-				os << "---";
-			os << elem->getBetu() << "(" << melyseg -1 << ")" << std::endl;
-			--melyseg;
- 		}
-	}
+			char *spaces;
+			spaces =(char*) malloc(sizeof(char)*depth*2+1);
+			for(int i=0;i<depth;i+=2)
+			{
+				spaces[i]='-';
+				spaces[i+1]='-';
+			}
+			spaces[depth*2]='\0';
 
-	//pre-ordere kiíratás
-	void kiirPre (Csomopont * elem, std::ostream & os)
-	{
-		if(elem != NULL)
-		{
-			++melyseg;
-			for(int i = 0; i < melyseg; ++i)
-				os << "---";
-			
-			os << elem->getBetu() << "(" << melyseg - 1 << ")" << std::endl;
-			
-			kiirPre(elem->egyesGyermek (), os);
-			kiirPre(elem->nullasGyermek(), os);
-			--melyseg;
+			printf("%s%c\n",spaces,elem->c);
+			free(spaces);
 		}
-	}
-
-	void szabadit(Csomopont * elem)
-	{
-		if(elem != NULL)
+		else
 		{
-			szabadit(elem->nullasGyermek ());
-			szabadit(elem->egyesGyermek ());
-			delete elem;
+			printf("%c\n",elem->c);
 		}
+		preorder(elem->left,depth+1);	
+		preorder(elem->right,depth+1);
 	}
-	void kiirCsom(Csomopont  elem){
-		std::cout << elem.getBetu() << "sima" <<std::endl;
+
+	void inorder(Node* elem,int depth=0)
+	{
+		if(elem==null)
+		{
+			return;
+		}
+		inorder(elem->left,depth+1);
+		if(depth) 
+		{
+			char *spaces;
+			spaces =(char*) malloc(sizeof(char)*depth*2+1);
+			for(int i=0;i<depth;i+=2)
+			{
+				spaces[i]='-';
+				spaces[i+1]='-';
+			}
+			spaces[depth*2]='\0';
+
+			printf("%s%c\n",spaces,elem->c);
+			free(spaces);
+		}
+		else
+		{
+			printf("%c\n",elem->c);
+		}	
+		inorder(elem->right,depth+1);
 	}
-	/*void kiirCsom2(Csomopont & elem){
-		std::cout << elem.getBetu() << std::endl;
-	}*/
-protected:
 
-	Csomopont gyoker;
-	int maxMelyseg;
-	double atlag, szoras;
+	void postorder(Node* elem,int depth=0)
+	{
+		if(elem==null)
+		{
+			return;
+		}
+		postorder(elem->left,depth+1);
+		postorder(elem->right,depth+1);
+		if(depth) 
+		{
+			char *spaces;
+			spaces =(char*) malloc(sizeof(char)*depth*2+1);
+			for(int i=0;i<depth;i+=2)
+			{
+				spaces[i]='-';
+				spaces[i+1]='-';
+			}
+			spaces[depth*2]='\0';
 
-	void rmelyseg(Csomopont * elem);
-	void ratlag (Csomopont *elem);
-	void rszoras (Csomopont * elem);
+			printf("%s%c\n",spaces,elem->c);
+			free(spaces);
+		}
+		else
+		{
+			printf("%c\n",elem->c);
+		}	
+	}
+
+	void destroy_tree(Node* elem)
+	{
+		if(elem==null)
+		{
+			return;
+		}
+		destroy_tree(elem->left);
+		destroy_tree(elem->right);
+		if(elem->c!='/') delete elem;
+	}
+
+	Node gyoker;
+
 };
 
-int LZWBinFa::getMelyseg (void)
+void usage()
 {
-	melyseg = maxMelyseg = 0;
-	rmelyseg (&gyoker);
-	return maxMelyseg -1;
+	printf("Használat: ./binfa KAPCSOLÓ\n");
+	printf("Az KAPCSOLÓ lehet:\n");
+	printf("--preorder\tA bináris fa preorder bejárása\n");
+	printf("--inorder\tA bináris fa inorder bejárása\n");
+	printf("--postorder\tA bináris fa postorder bejárása\n");
 }
 
-double LZWBinFa::getAtlag (void)
+int main(int argc, char** argv)
 {
-	melyseg = atlagosszeg = atlagdb = 0;
-	ratlag (&gyoker);
-	atlag = ((double) atlagosszeg) / atlagdb;
-	return atlag;
-}
-
-double LZWBinFa::getSzoras (void)
-{
-	atlag = getAtlag ();
-	szorasosszeg = 0.0;
-	melyseg = atlagdb = 0;
-
-	rszoras(&gyoker);
-	if(atlagdb - 1 > 0)
-		szoras = std::sqrt (szorasosszeg / (atlagdb - 1));
+	srand(time(0));
+	Binfa bfa;
+	for(int i=0;i<100;i++)
+	{
+		int x=rand()%2;
+		if(x)
+		{
+			bfa<<'1';
+		}
+		else
+		{
+			bfa<<'0';
+		}
+	}
+	if(argc == 2)
+	{
+		if(strcmp(argv[1],"--preorder")==0)
+		{
+			bfa.preorder(&bfa.gyoker);
+		}
+		else if(strcmp(argv[1],"--inorder")==0)
+		{
+			bfa.inorder(&bfa.gyoker);
+		}
+		else if(strcmp(argv[1],"--postorder")==0)
+		{
+			bfa.postorder(&bfa.gyoker);
+		}
+		else
+		{
+			usage();
+		}
+	}
 	else
-		szoras = std::sqrt (szorasosszeg);
-	return szoras;
-}
-
-void LZWBinFa::rmelyseg (Csomopont * elem)
-{
-	if(elem != NULL)
 	{
-		melyseg++;
-		if (melyseg > maxMelyseg)
-			maxMelyseg = melyseg;
-		rmelyseg (elem->egyesGyermek());
-		rmelyseg (elem->nullasGyermek ());
-		melyseg--;
+		usage();
 	}
-}
-
-void LZWBinFa::ratlag (Csomopont * elem)
-{
-	if(elem !=NULL)
-	{
-		melyseg++;
-		ratlag (elem->egyesGyermek());
-		ratlag (elem->nullasGyermek ());
-		melyseg--;
-		if(elem->egyesGyermek () == NULL && elem->nullasGyermek () == NULL)
-		{
-			atlagdb++;
-			atlagosszeg += melyseg;
-		}
-	}
-}
-
-void LZWBinFa::rszoras (Csomopont * elem)
-{
-	if(elem != NULL)
-	{
-		melyseg++;
-		rszoras (elem->egyesGyermek());
-		rszoras (elem->nullasGyermek ());
-		melyseg--;
-		if(elem->egyesGyermek () == NULL && elem->nullasGyermek () == NULL)
-		{
-			atlagdb++;
-			szorasosszeg += ((melyseg - atlag) * (melyseg - atlag));
-		}
-	}
-}
-
-void usage (void)
-{
-	std::cout << "Usage: lzwtree in_file -o out_file" << std::endl;
-}
-
-int main(int argc, char *argv[])
-{
-
-
-
-	if(argc != 4)
-	{
-		usage ();
-		return -1;
-	}
-
-	char *inFile = *++argv;
-	
-	/*std::cout << **argv << std::endl;
-	std::cout << *argv[0] << std::endl;
-	std::cout << argv[0][0] << std::endl;*/
-
-	if(*((*++argv) + 1) != 'o')
-	{
-		usage ();
-		return -2;
-	}
-
-	std::fstream beFile (inFile, std::ios_base::in);
-
-	if(!beFile)
-	{
-		std::cout << inFile << " nem létezik..." << std::endl;
-		usage ();
-		return -3;
-	}
-
-	std::fstream kiFile (*++argv, std::ios_base::out);
-
-	unsigned char b;
-
-	LZWBinFa binFa;
-
-
-	
-	while(beFile.read ((char *) &b, sizeof (unsigned char)))
-		if(b == 0x0a)
-			break;
-	/*double a = 2.3;
-	int b;
-	b= (int) a;*/
-
-	bool kommentben = false;
-
-	while(beFile.read((char *) &b, sizeof(unsigned char)))
-	{
-		if(b == 0x3e)
-		{
-			// > karakter
-			kommentben = true;
-			continue;
-		}
-
-		if(b == 0x0a)
-		{
-			//új sor
-			kommentben = false;
-			continue;
-		}
-
-		if(kommentben)
-			continue;
-
-		if(b == 0x4e) //N betű
-			continue;
-
-		for(int i = 0;i < 8;++i)
-		{
-			
-			if(b & 0x80){
-				
-				binFa << '1';
-			//	binFa.operator<<('1');
-
-			}
-			else
-				binFa << '0';
-			b <<=1;
-		}
-	}
-
-	//binFa.kiir();
-	std::cout << binFa.getMelyseg () << std::endl;
-	std::cout << binFa.getAtlag () << std::endl;
-	std::cout << binFa.getSzoras () << std::endl;
-
-	LZWBinFa bfa2;
-	bfa2 = binFa;
-	std::cout << "másolt bfa2" << std::endl;
-	std::cout << bfa2.getMelyseg () << std::endl;
-	std::cout << bfa2.getAtlag () << std::endl;
-	std::cout << bfa2.getSzoras () << std::endl;	
-
-	
-
-	//operator<<(operator<<(kiFile, binFa),binFa);
-	kiFile << binFa;
-
-	//kiFile << binFa << binFa;
-
-	//binFa.operator<<(binFa.operator<<(kiFile,binFa),binFa);
-
-
-
-	kiFile << "depth = " << binFa.getMelyseg () << std::endl;
-	kiFile << "mean = " << binFa.getAtlag () << std::endl;
-	kiFile << "var = " << binFa.getSzoras () << std::endl;
-
-	kiFile.close();
-	beFile.close();
-
+	bfa.destroy_tree(&bfa.gyoker);
 	return 0;
 }
