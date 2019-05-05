@@ -1,0 +1,100 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Mandelbrot!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        <title>A Mandelbrot halmaz</title>
+        <para>
+                
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/mandelbrot.cpp">https://github.com/BOPI98/BHAX_feladatok/blob/master/mandelbrot.cpp</link>
+        </para>
+	<para>
+	Tanulság: 
+	A mandelbrot halmaz egy komplex számokból álló rekurzív sorozat. A megjelenítés úgy történik, hogy egy algoritmus alapján kiszámított pontokat a komlex számsíkon ábrázoljuk. Mivel rekurzív függvényről van szó ezért a végtelenségig részletes lesz a kép. A programhoz png++ headert kell használni a képek elkészítéséhet. Az első sorokban definiálunk méreteket a kimeneti képről és az algoritmushoz szükséges értékeket is itt adjuk meg. A main előtt még létrehozzuk a generáló függvényt és egy komplex struktúrát. A generáló függvény kiszámítja minden pixel értékét rgb_pixel függvénnyel. A mainben létrehozzuk a kép tömbjét, deklaráljuk az algoritmushoz szükséges változókat, majd ciklussal minden pixel értékét kiszámítjuk, és meghívjuk ezekre az értékekre a generáló függvényt.
+	</para>
+    </section>        
+        
+    <section>
+        <title>A Mandelbrot halmaz a <filename>std::complex</filename> osztállyal</title>
+        <para>
+                
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/mandelbrot_komplex.cpp">https://github.com/BOPI98/BHAX_feladatok/blob/master/mandelbrot_komplex.cpp</link>
+        </para>
+<para>
+Ez a feladat ugyan az mint az előző csak itt nem struktúrát hozunk létre a komplexhez hanem headerből hívjuk meg. Az algoritmus nem változott és a generáló függvény is ugyanúgy működik, mint az előzőben. A síkbeli alakzat alapvetően egy egyszerű algebrai összefüggést rajzol ki. Az alakzat semmiben sem különbözik az euklideszi síktól, egyedül a pontok meghatározása másabb.
+</para>
+    </section>        
+                
+    <section>
+        <title>Biomorfok</title>
+        <para>
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://youtu.be/IJMbgRzY76E">https://youtu.be/IJMbgRzY76E</link>
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/Biomorf">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/Biomorf</link>
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... : A program ugyanaz, mint az előzők, annyi különbséggel hogy ítt a program indításával visszük be az adatokat. A képet ismét az rgb_pixel függvénnyel készítjük, az algoritmus lefutása után write függvénnyel az első argumentum nevén elmenti a png-t. A program egy másik mintát állít elő mint a mandelbrot halmazban látható, de a tematika itt is hasonló. Ennél a programnál bár a kép lehet végtelen részletes, mégsem keletkezik új minta, ahogy a mandelbrotnál.
+        </para>                        
+    </section>                     
+
+    <section>
+        <title>A Mandelbrot halmaz CUDA megvalósítása</title>
+        <para>
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása:  <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/mandel_cuda.cpp">https://github.com/BOPI98/BHAX_feladatok/blob/master/mandel_cuda.cpp</link>
+        </para>
+
+	<para>
+	A CUDA egy Nvidia által létrehozott eljárási módszer, ami párhuzamosan számít ki adatokat. Ez a megoldás általában mátrixoknál hasznos és kép, vagy grafikus számításoknál használandó. A CUDA megvalósítás gyorsabb lefutási sebességet eredményez a pixelek kiszámolásakor. A CUDA előnyeként szolgál, hogy a rendezés sokkal gyosrabban történik és a gpu-k között gyorsabb letöltés és visszajelzés van.
+	</para>
+    </section>                     
+
+    <section>
+        <title>Mandelbrot nagyító és utazó C++ nyelven</title>
+        <para>
+            Építs GUI-t a Mandelbrot algoritmusra, lehessen egérrel nagyítani egy területet, illetve egy pontot
+            egérrel kiválasztva vizualizálja onnan a komplex iteréció bejárta z<subscript>n</subscript> komplex számokat!
+        </para>
+            
+        <para>
+            Megoldás forrása:  
+        </para>
+
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása:  <link xlink:href="https://sourceforge.net/p/udprog/code/ci/master/tree/source/kozepes/Qt/mandel_nagyito/">https://sourceforge.net/p/udprog/code/ci/master/tree/source/kozepes/Qt/mandel_nagyito/</link>
+        </para>
+	<para>
+	Magyarázat: A program ugan úgy épül fel mint az előzők. A nagyító úgy működik, hogy egy pontra kattintva kiszámítja a ráközelített kép adatait és ezekkel az adatokkal újra elvégzi a számítást. Mivel minden alkalomman újragenerálja a képet ezért a végtelenségig fog menni a kép. A Qt programmal létrehozott grafikus felület tulajdonképpen annyiból áll, hogy egérkattintás inputtal közelít a képre, vagyis generálja le egy közelebbi változatát. Ezzel a funkcióval akár a végtelenségig is generálhatjuk a mégközelebbi képeket.
+	</para>
+    </section>                     
+                                                                                                                                                                            
+    <section>
+        <title>Mandelbrot nagyító és utazó Java nyelven</title>
+        <para>
+        </para>
+    </section>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                

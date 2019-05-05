@@ -1,0 +1,102 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Caesar!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        <title><type>int ***</type> háromszögmátrix</title>
+        <para>
+           
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://youtu.be/1MRTuKwRsB0">https://youtu.be/1MRTuKwRsB0</link>
+        </para>
+        <para>
+            Megoldás forrása:    <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/haromszog.c">https://github.com/BOPI98/BHAX_feladatok/blob/master/haromszog.c</link>
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... : Ez a program egy háromszög alakú kiiratást fog végrahajtani, amely úgy épül fel, hogy a program double változókat allokál a memórában és egy ciklus segítségével soronként tudjuk növelni az allokációk méretét. Malloc függvény fog mutatni az adott sor méretére. A program végén free függvénnyel lefuttatva megkapjuk, hogy hány lefoglalt allokáció van a memóriában.
+        </para>            
+    </section>        
+    <section>
+        <title>C EXOR titkosító</title>
+        <para>
+            Írj egy EXOR titkosítót C-ben!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:<link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/exort.c">https://github.com/BOPI98/BHAX_feladatok/blob/master/exort.c</link>
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...: A programban define-oljuk a buffer méretet, és a max kulcsméretet, majd a main függvényben kulcsot és buffert deklarálunk. Utána while ciklusban a beolvasott adattal lefuttatjuk a for ciklusban lévő titkosítást.
+        </para>            
+    </section>        
+    <section>
+        <title>Java EXOR titkosító</title>
+        <para>
+            Írj egy EXOR titkosítót Java-ban!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/exor.java">https://github.com/BOPI98/BHAX_feladatok/blob/master/exor.java</link>
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... : A program egy tiszta.txt fájlból olvassa be a titkosítandó adatot, utána bekér egy kódot, aminek egyeznie kell hogy lefusson a titkosítás, majd a titkosító ciklusok után visszairatja a fájlban a fordított szöveget.
+        </para>            
+    </section>        
+    <section>
+        <title>C EXOR törő</title>
+        <para>
+            Írj egy olyan C programot, amely megtöri az első feladatban előállított titkos szövegeket!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:     <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/exor.c">https://github.com/BOPI98/BHAX_feladatok/blob/master/exor.c</link>           
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...: A programhoz stdio, unistd, stdlib és string header-ekre lesz szükség. Az első része egy átlag szóhossz számító double függvény, ahol paraméterként meg kell adni egy konstans karaktermutatót ls egy integert. Ez a függvény a szóközök megszámlálásával számítja ki az átlagot. A második függvény azt vizsgálja, hogy az átlag szóhossz 6 és 8 között van-e és, hogy van-e benne "hogy, nem, az, ha" szó. Ezt követi egy void függvény, amihez egy konstans karaktertömb kell a kulcshoz, kell ennek a mérete, maga a titkos szöveg, a mérete, és a buffer karakterpointerként. A függvény kiszámítja a buffereket, majd a következő cikluskörhöz a kulcsindexet. Utána jön az exor törés függvény amihez paraméterként ismét kell egy kulcs, kulcsméret, titkos szöveg és a mérete. A függvényben, ha a buffer NULL akkor failed-et ír és újra lefut az exor. Majd ha a buffer lefut igazként a tiszt a függvényben akkor kiiratja a kulcsot és a Tiszta szöveget. A függvény végén free függvénnyel kiiratja a szaban és foglalt memória allokációkat.
+A main függvényben deklarálunk és végrahajtjuk a beolvasást, majd a kulcs megadással lefuttatjuk az exortörőt.
+        </para>            
+    </section>        
+    <section>
+        <title>Neurális OR, AND és EXOR kapu</title>
+        <para>
+            R
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://youtu.be/Koyw6IH5ScQ">https://youtu.be/Koyw6IH5ScQ</link>
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/NN_R">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/NN_R</link>               
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...: Ez a program létrehoz egy neurális hálót, ami alapvető logikai műveleteket hajt végre, mint például or, and és exor. A műveletek naggyából egy mintára épül, ahol megadjuk a bemenet alapján a neuralnet függvénnyel, hogy milyen eredményhez kell közelítenie a thresholdon belül. A prot függvénnyel kirajzoljuk az eredményt.
+
+        </para>            
+    </section>        
+    <section>
+        <title>Hiba-visszaterjesztéses perceptron</title>
+        <para>
+            C++
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:    <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/perceptron.cpp">https://github.com/BOPI98/BHAX_feladatok/blob/master/perceptron.cpp</link>            
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...: A program elején egy if-fel teszteli hogy az 2-e az argumentumszám és ha nem, akkor hibát dob. Ezután beolvassuk a fájlt és neurális hálóval letrehozunk egy perceptront. Majd egy tömböt hoz létre annyi karakterrel ahány pixeles a kép soronként. Ebbe a tömbbe a kép piros értékét belemásolja, majd meghívja a preceptront és return 0-val kilép.
+        </para>            
+    </section>        
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                

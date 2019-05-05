@@ -1,0 +1,98 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Conway!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        <title>Hangyaszimulációk</title>
+        <para>
+            Írj Qt C++-ban egy hangyaszimulációs programot, a forrásaidról utólag reverse engineering jelleggel
+            készíts UML osztálydiagramot is!
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://bhaxor.blog.hu/2018/10/10/myrmecologist">https://bhaxor.blog.hu/2018/10/10/myrmecologist</link>
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/Myrmecologist">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/Myrmecologist</link>               
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...: A hangyaszimulációs program egy qt-vel létrehozott program ami egy grafikus felületet alkot. Ebben a grafikus felületben fog a program végrehajtódni és a megalkotott algoritmus szerint működni. A program áll egy hangya részből, ami koordinátát tárol és a hangya írányát. Aztán az antthread programmal határozzuk meg a hangyák mozgását és irányát a képernyőn. Az antwin programrészben hozzátesszük a program végét meghatározó eseményeket és a szüneteltetést. A main program össszefoglalja a fő programot majd qt-val létrehozzuk a futtatható programot.
+
+        </para>            
+    </section>        
+    <section>
+        <title>Java életjáték</title>
+        <para>
+            Írd meg Java-ban a John Horton Conway-féle életjátékot, 
+            valósítsa meg a sikló-kilövőt!
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/eletjatek.java">https://github.com/BOPI98/BHAX_feladatok/blob/master/eletjatek.java</link>               
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... : Az életjátékot John Conway, egy matematikus találta fel. A játék nem igazi játék de egy érdekes szimuláció. A játékosnak meg kell adnia a kezdő mezőket és a program elkezdi az algoritmus futtatását. Mivel különösebb interakció nincs a programmal így addig fut a program ameddig van élő sejt vagy addig amíg a felhasználó le nem állítja.
+        </para>            
+    </section>        
+    <section>
+        <title>Qt C++ életjáték</title>
+        <para>
+            Most Qt C++-ban!
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása: 
+</para>
+<para>
+<link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/sejtszal.h">https://github.com/BOPI98/BHAX_feladatok/blob/master/sejtszal.h</link>               
+</para>
+
+<para>
+<link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/sejtszal.cpp">https://github.com/BOPI98/BHAX_feladatok/blob/master/sejtszal.cpp</link>               
+</para>
+
+<para>
+<link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/sejtablak.h">https://github.com/BOPI98/BHAX_feladatok/blob/master/sejtablak.h</link>               
+</para>
+
+<para>
+<link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/sejtablak.cpp">https://github.com/BOPI98/BHAX_feladatok/blob/master/sejtablak.cpp</link>               
+</para>
+
+<para>
+<link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/main.cpp">https://github.com/BOPI98/BHAX_feladatok/blob/master/main.cpp</link>               
+</para>
+
+<para>
+<link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/Sejtauto.pro">https://github.com/BOPI98/BHAX_feladatok/blob/master/Sejtauto.pro</link>               
+</para>
+        
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...: A qt programot gui-s magyarán grafikus felületű alkalmazások fejlesztésére használják. Ezt a programot linuxon mac-en windowson és symbian-on lehet használni. A Conway féle életjáték mivel grafikus felületű program ezért a qt-val c++ nyelven is meg lehet írni. Az életjáték négyzetrács mezőiből áll amelyeket körül vesz másik nyolc mező. A folyamat körökre osztott és random vellákat jelölhetünk ki. Ezután a program futása közben ha egy set körül 3 sejt van akkor megmarad. Elpusztul, ha kettőnél kevesebb, vagy háromnál több. És létre jön egy sejt ha egy adott cellának van három szomszédja.
+        </para>            
+	<para>
+	
+	</para>
+    </section>        
+    <section>
+        <title>BrainB Benchmark</title>
+        <para>
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/nbatfai/esport-talent-search">https://github.com/nbatfai/esport-talent-search</link>               
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...: A BrainB program egy esport talent mérő program. ez azt jelenti hogy 10 percen keresztül kell a tesztet végezni, amiből megállapítja az alany teljesítményét reflexek szintjén. Egy bizonyos kört kell követni az egérrel ami folyamatosan mozog és mellette még sok más nevű gömb van a zavarás miatt. Minél pontosabban követjük a kört, annál több pontot fog mérni a program. A teszt végén egy szöveges fájlban megtalálhatjuk az eredményt, amely statisztikákat mutat tehetségünkről. Ez a program szintén qt segítségével jött létre a grafikus felület miatt.
+        </para>            
+    </section>        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                

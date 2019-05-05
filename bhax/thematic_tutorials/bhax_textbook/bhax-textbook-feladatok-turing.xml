@@ -1,0 +1,265 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Turing!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        <title>Végtelen ciklus</title>
+        <para>
+            Írj olyan C végtelen ciklusokat, amelyek 0 illetve 100 százalékban dolgoztatnak egy magot és egy olyat, amely  
+            100 százalékban minden magot!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: 
+		<programlisting language="c"><![CDATA[
+		Végtelen ciklus 0%
+
+		#include <unistd.h>
+		int main()
+		{
+		for(;;) sleep(1);
+		return 0;
+		}
+		]]></programlisting>
+		<programlisting language="c"><![CDATA[
+		Végtelen ciklus egy magra
+
+		#include <stdio.h>
+		int main()
+		{
+		for(;;);
+		return 0;
+		}
+		]]></programlisting>
+		<programlisting language="c"><![CDATA[
+		Végtelen ciklus minden magra
+
+		#include <omp.h>
+		int main()
+		{
+		#pragma omp parallel
+		{
+		for(;;);
+		}
+		return 0;
+		}
+
+		]]></programlisting>
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... : A feladat lényege, hogy egy olyan programot írjunk, amely folyanatosan fut és 0%-ban, 100%-ban lefoglal egyet és 100%-ban lefoglal minden processzor magot. Ezt egy olyan ciklusba kell foglalni melynek feltétele mindig igaz lesz, ezáltal végtelen köröket fog futni a program. A for ciklus három kifejezését üresen hagyjuk, mivel sem deklaráció, sem feltétel, sem ciklus végi művelet nem lesz. A ciklus így a végtelenségig fog futni. A minden magot lefoglaló programhoz szükséges az omp.h header és a main-be a #pragma omp parallel sor. A fordításhoz -fopenmp kapcsoót kell használni (ha többször írjuk be a kapcsolót a fordításhoz egyel több magot fog lefoglalni).
+        </para>            
+    </section>        
+        
+    <section>
+        <title>Lefagyott, nem fagyott, akkor most mi van?</title>
+        <para>
+            Mutasd meg, hogy nem lehet olyan programot írni, amely bármely más programról eldönti, hogy le fog-e fagyni vagy sem!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:  tegyük fel, hogy akkora haxorok vagyunk, hogy meg tudjuk írni a <function>Lefagy</function>
+            függvényt, amely tetszőleges programról el tudja dönteni, hogy van-e benne vlgtelen ciklus:              
+        </para>
+        <programlisting language="c"><![CDATA[Program T100
+{
+
+	boolean Lefagy(Program P)
+	{
+		 if(P-ben van végtelen ciklus)
+			return true;
+		 else
+			return false; 
+	}
+
+	main(Input Q)
+	{
+		Lefagy(Q)
+	}
+}]]></programlisting>            
+        <para>
+            A program futtatása, például akár az előző <filename>v.c</filename> ilyen pszeudókódjára:
+            <screen><![CDATA[T100(t.c.pseudo)
+true]]></screen>            
+            akár önmagára
+            <screen><![CDATA[T100(T100)
+false]]></screen>  
+            ezt a kimenetet adja.          
+        </para>
+        <para>
+            A T100-as programot felhasználva készítsük most el az alábbi T1000-set, amelyben a
+            Lefagy-ra épőlő Lefagy2 már nem tartalmaz feltételezett, csak csak konkrét kódot:
+        </para>
+        <programlisting language="c"><![CDATA[Program T1000
+{
+
+	boolean Lefagy(Program P)
+	{
+		 if(P-ben van végtelen ciklus)
+			return true;
+		 else
+			return false; 
+	}
+
+	boolean Lefagy2(Program P)
+	{
+		 if(Lefagy(P))
+			return true;
+		 else
+			for(;;); 
+	}
+
+	main(Input Q)
+	{
+		Lefagy2(Q)
+	}
+
+}]]></programlisting>            
+        <programlisting><![CDATA[]]></programlisting>            
+        <para>
+            Mit for kiírni erre a <computeroutput>T1000(T1000)</computeroutput> futtatásra?
+                                
+            <itemizedlist>
+                <listitem>
+                    <para>Ha T1000 lefagyó, akkor nem fog lefagyni, kiírja, hogy true</para>                        
+                </listitem>
+                <listitem>
+                    <para>Ha T1000 nem fagyó, akkor pedig le fog fagyni...</para>                        
+                </listitem>
+            </itemizedlist>
+            akkor most hogy fog működni? Sehogy, mert ilyen <function>Lefagy</function>
+            függvényt, azaz a T100 program nem is létezik.                
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...: Mivel minden esetben lefagy a program, ezért nem létezik olyan program, ami el tudja dönteni egy programról, hogy van-e benne vételen ciklus.
+        </para>
+    </section>        
+                
+    <section>
+        <title>Változók értékének felcserélése</title>
+        <para>
+            Írj olyan C programot, amely felcseréli két változó értékét, bármiféle logikai utasítás vagy kifejezés
+            nasználata nélkül!
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://bhaxor.blog.hu/2018/08/28/10_begin_goto_20_avagy_elindulunk">https://bhaxor.blog.hu/2018/08/28/10_begin_goto_20_avagy_elindulunk</link>
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/3csere.c">https://github.com/BOPI98/BHAX_feladatok/blob/master/3csere.c</link>
+        
+	
+	</para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... :	Ebben a programban alapvető matematikai műveletekre és egy kiiratási függvényre lesz szükség, ezért egy stdio headert használunk. A fő függvényben először is deklarálunk két változót, ami ebben az esetben két egész szám. Ezt a két számot printf() függvénnyel kiiratjuk. A printf függvényben az idézőjelen belül beírjuk a megjelenítendő szöveget. Ha változókat akarunk elhelyezni a kiiratásban akkor azt a változó típusával kell helyettesíteni (jelen esetben %i, az integer típus miatt) és a változónevet rendre vesszővel elválasztva kell felsorolni az idézőjel után. Az idézőjelen belüli utolsó két karakter (\n) a sortörést jelzi, amely nem jelenik meg a végső kiiratásban. Ezután a csere következik. Mivel segédváltozó nélkül kell dolgoznunk, ezért összeadással és kivonással fog a csere megtörténni. A csere után újabb kiiratást teszünk, majd return 0 visszatérő értékkel jelezzük hogy sikeresen lefutott a program.
+        </para>
+    </section>                     
+
+    <section>
+        <title>Labdapattogás</title>
+        <para>
+            Először if-ekkel, majd bármiféle logikai utasítás vagy kifejezés
+            nasználata nélkül írj egy olyan programot, ami egy labdát pattogtat a karakteres konzolon! (Hogy mit értek
+            pattogtatás alatt, alább láthatod a videókon.)
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://bhaxor.blog.hu/2018/08/28/labdapattogas">https://bhaxor.blog.hu/2018/08/28/labdapattogas</link>
+        </para>
+        <para>
+            Megoldás forrása:  
+	iffel: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/4labda.c">https://github.com/BOPI98/BHAX_feladatok/blob/master/4labda.c</link>
+	</para>
+	<para>
+	if nélküli: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/noif.c">https://github.com/BOPI98/BHAX_feladatok/blob/master/noif.c</link>
+
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... :
+	A programban létre kell hozni egy screen-t, és ezen fogjuk elhelyezni a pattogó labdát. Deklarálunk egy növekvő értéket és x, y koordinátákat. Végtelen ciklusban léptetjük a labdát és ha a screen szélére ér, akkor negatív növekvő értékre váltunk. Minden alkalommal clear-elni és usleep-elni kell a programot a ciklusban. 
+        </para>
+    </section>                     
+
+    <section>
+        <title>Szóhossz és a Linus Torvalds féle BogoMIPS</title>
+        <para>
+            Írj egy programot, ami megnézi, hogy hány bites a szó a gépeden, azaz mekkora az <type>int</type> mérete.
+            Használd ugyanazt a while ciklus fejet, amit Linus Torvalds a BogoMIPS rutinjában! 
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href=""></link>
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/5szohossz.c">https://github.com/BOPI98/BHAX_feladatok/blob/master/5szohossz.c</link>
+	
+        </para>
+	<para>
+<link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/bogomips.c">https://github.com/BOPI98/BHAX_feladatok/blob/master/bogomips.c</link>
+	</para>
+
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... : Ez a program egy int váltózónak számolja meg, hogy hány bitből áll. Az elején deklarálunk egy int változót pl:a és deklarálunk egy megszámlálás tételéhez szükséges egész számot. A while ciklus feltételében addig bitshiftteljük a számot, amíg teljesen le nem nullázódik. A ciklus végén mindig növeljük a számlálót és ez adja meg a szó hosszát.
+
+A bogomips programban egy delay függvényre lesz szükség ami bevesz egy loop számot és ennyiszer lefuttat egy üres ciklust. Majd a main függvényben deklaráljuk a loop/sec változót és a tick-et. Egy while ciklusban addig fut a ciklusmag amíg bitshifttel 0-t nem kapunk a loop/sec-ből. A ciklusmagban kiszámítjuk az órajel külünbséget a delay függvény meghívása után. Majd kifejezzük és kiiratjuk a loop_per_sec értékét. Ha hamis érték tér vissza, failed-et ír ki a program.
+        </para>
+    </section>                     
+
+    <section>
+        <title>Helló, Google!</title>
+        <para>
+            Írj olyan C programot, amely egy 4 honlapból álló hálózatra kiszámolja a négy lap Page-Rank 
+            értékét!
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href=""></link>
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/pagerank.c">https://github.com/BOPI98/BHAX_feladatok/blob/master/pagerank.c</link>
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... :A program célja, hogy négy page-et sorrendbe rendezzen egy pagerank algoritmus alapján. Minden page mutat másokra, amit egy mátrixba rendezve tudunk eltárolni. Ezután lefuttatjuk a megfelelő algoritmust az elemekre és így megkapjuk az értékeket.
+        </para>
+    </section>
+
+    <section xml:id="Brun">
+        <title>100 éves a Brun tétel</title>
+        <para>
+            Írj R szimulációt a Brun tétel demonstrálására!
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://youtu.be/xbYhp9G6VqQ">https://youtu.be/xbYhp9G6VqQ</link>
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/blob/master/attention_raising/Primek_R">https://gitlab.com/nbatfai/bhax/blob/master/attention_raising/Primek_R</link>
+        </para>
+
+	<para>
+	A Brun tétel azt demonstrálja, hogy az ikerprímek (két egymás utáni ikerprím különbsége 2) szummája egy számhoz haladnak. A tételt Viggo Brun bizonyította 1919-ben és szitaeljáráshoz használják. Irracionális Brun-konstans, akkor lehet, ha végtelen sok ikerprím van. Létezik egy brun konstans prímnégyesekre is ami két ikerprímpárból áll. A programban a megadott értékig legenerálja a prímeket, majd az egymásra rákövetkező prímek különbségét változóba tárolja. Ha a különbség kettő, akkor ikerprímként tároljuk el, majd egy másik tömbben az ikerprímek második tagját tároljuk. Végül a két tag recoprokértékének összegeit összeadjuk.
+	</para>
+    </section>
+    
+    <section xml:id="bhax-textbook-feladatok-turing.MontyHall">
+        <title>A Monty Hall probléma</title>
+        <para>
+            Írj R szimulációt a Monty Hall problémára!
+	
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://bhaxor.blog.hu/2019/01/03/erdos_pal_mit_keresett_a_nagykonyvben_a_monty_hall-paradoxon_kapcsan">https://bhaxor.blog.hu/2019/01/03/erdos_pal_mit_keresett_a_nagykonyvben_a_monty_hall-paradoxon_kapcsan</link>
+        </para>
+        <para>
+		
+            Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/MontyHall_R">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/MontyHall_R</link>
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... : A Monty Hall probléma arról szól, hogy ha három lehetőség közül csak az egyik lesz kedvező, majd választunk egyet és a fentmaradó lehetőségek közül megmondjuk, hogy az egyik nem a kedvező lehetőség, akkor érdemes e megváltoztatni a választásunkat vagy nem. Mivel az eredeti fennállásból adódóan 33.33% esélyünk van és minden másnak 66.66% esélye van így, ha van lehetőség a választásra nagyobb valószínűsége van annak, hogy a kedvezőt választjuk ha cserélünk.
+	A szimuláció abból áll, hogy több kísérletet teszünk a Monty Hall problémára. Mivel az esetek kimenete nem állandó így eredményt csak a statisztikán keresztül láthatjuk.
+        </para>
+    </section>
+
+</chapter>                

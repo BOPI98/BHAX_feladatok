@@ -1,0 +1,116 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Gutenberg!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+        <cover>
+            <para>
+                Programozás tankönyvek rövid olvasónaplói.
+            </para>
+		
+        </cover>
+    </info>
+
+    <section>
+        <title>Programozási alapfogalmak</title>
+        <para>
+		2. hét(pici könyv):
+		A programozási nyelvek három szintjét különböztetjük meg, a magasszintű, assembly és gépi nyelvet, melyek közül a magasszintűnek van forráskódja és ehhez szabályok tartoznak, ami a nyelv szintaktikája. A nyelv forráskódját fordítóval elemezni kell szintaktikailag lexikailag, és szematikailag, ezután legeneráljuk a kódot.
+		</para>
+	<para>
+	3. hét(pici könyv 28. oldaltól):
+	A programozási nyelven belül különböző adattípusok vannak amelyeket névvel azonosítunk, egyes esetekben lehetősége van a felhaszálónak adattípust definiálni. Létezik struktúrált és egyszerű adattípus, ami abban különbözik, hogy az egyszerű nem bontható tovább, mert atomi elemei vannak(a logikában értelmezhetőek literálként). 
+
+	Egy programban minden eszközt deklarálni kell típus név és érték szerint és mindig "beszélő" névvel kell ellátni ezeket a könnyebb későbbi értelmezés érdekében.
+	
+	A változók négy komponensből állnak (név, attribútum, cím és érték). Az azonosító lesz a név, amihez a többi hozzárendelődik. Létezik implicit, explicit és autómatikus deklaráció. Címrendelésnek 3 fajtája van statikus, dinamikus és programozó általi. Értékadásnak két fajtája van, kezdőérték és értékadó utasítás.
+
+	A C nyelvben egyszerű típusnak számítanak az aritmetikai típusok amelyen alapulnak például a logikai típusok. Az igaz az 1 a hamis a 0. 
+</para>
+<para>
+	4. hét(pici könyv)
+	Egy programozási nyelvben jelen vannak a szintaktikai kifejezések, amelyek zárójelekből, operátorokból és operandusokból állnak. Léteznek unáris, bináris és ternárs operátor. Három alakjuk van prefix, infix és postfix. Kifejezésből van típuskényszerítés és típusegyenértékűség.A fordítási időben meghatározandó kifejezés a konstans kifejezés.
+</para>
+<para>
+ 	5. hét(pici könyv):
+	A programban lévő utasításoknak két csoportjuk van, deklarácós és végrehajtó utasítás. A deklarációs utasítások a fordítóprogramhoz szükséges, a végrehajtó utasításból a kód lesz generálva. A végrehajtó utasításnak van értékadó, üres, ugró, ciklusszervező, elágaztató, hívó, i/o és vezérlésátadó utasításcsoport. 
+</para>
+<para>
+6. hét(pici könyv)
+A programokban minden eljárás több részre bontható amit program egységeknek nevezünk. A programegységek fordíthatóak közül van olyan amelyeket külön is lehet fordítani, van olyan amelyeket csak eggyüttesen és van amely a kettő kombinációjával lehet fordítani. Az alprogramok olyan programok melyek felhasználhatóak más programokhoz is. Ismétlés egyszerűbb formája egy alprogram meghívása. Egy alprogram névből, formális paraméterlistából, törzsből és környezetből áll. Két féle alprogram van, a függvény és az eljárás. A függvény visszaad egy értéket, az eljárás pedig visszatérő érték nélkül hajt végre műveleteket. Ezekek a műveleteknek szabályai vannak annak érdekében, hogy helyesen működjenek. Híváslánc alakul ki, ha egy programegység meghív egy másikat és így tovább. Mikor önmagát hívja meg egy függvény azt rekurzív függvénynek nevezzük. Másodlagos belépési pontazt teszi lehetővé, hogy a törzsben is lehessen belépési pontot kialakítani. Paraméterkiértékelés az egy olyan folyamat ahol egy alprogram hívásakor formális es aktuális paraméterek rendelődnek egymáshoz és meghatározódnak azok az információk, melyek a paraméterátadásnál létrehozzák a kommunikációt. A blokk egy programon belüli egység, ami csak a programon belül állhat. A blokknak paraméterei nincsenek, van kezdete törzse és vége.
+</para>
+<para>
+7. hét(pici könyv): 
+Aktuális-formális paraméterek egymáshoz rendelődése olyan információkat határoznak meg amiket a kommunikációt szolgálják, ezt paraméterkiértékelésnek nevezzük.  Név szerinti kötésnél meg kell adni a formális paraméternevet és az aktuális paramétert, itt a sorrend nem számít. Két féle képpen lehet kiértékelni a paramétert, vagy úgy hogy a paraméterszámának meg kell egyeznie vagy úgy hogy az aktuális paraméterszámának kisebbnek kell lennie mint a formálisnak. Paraméterátadásnak van több módja is. Érték szerinti, cím szerinti, eredmény szerinti, erték-eredmény szerinti, név szerinti, szöveg szerinti. Alprogramoknál nem lehet típust átadni paraméterként. Az alprogramnak input, output és input-output paraméterei vannak.
+</para>
+<para>
+8. hét(pici könyv): 30-33 96-97 98 121
+A program blokkja egy olyan programegység amely egy másik programegység belsejében helyezkedik el. Itt is megkülönböztetjük a végrehajtási és deklarációs részt. Egy programban a név hatásköre alatt értjük azt a programrészt ahol a program jellemzői azonosak. A hatáskörkezelés jelenti azt a tevékenységet amikor megállapítjuk egy név hatáskörét. A fordítás közben megtörténő hatáskörkezelés alapja a programszövegnek a programegység szerkezete. Ha talál egy szabad nevet egy programegységben akkor kilép és ellenőrzi, hogy lokális-e a név. Ha az akkor vége, de ha nem akkor tovább lépked ki addig amíg a lokális nevet meg nem találja. A legkülső szinten van két eset. Az egyik esetben hibát dob a deklaráció hibájára, a másik pedig autómatikus deklarációt végez és hiba nélkül fut le a program. A hatáskör csak befelé terjed. Azt a nevet nevezzük globálisnak amely az adott programegységben nem lokális, de látható onnan. A dinamikus hatáskörkezelést a futtató rendszer végzi és a hívási lánc az alapja. Az eljárásorientált nyelvek megvalósítják a hatáskörkezelést.
+</para>
+
+<para>
+9. hét(pici könyv 134-138)Az I/O a programnyelvben az az eszközrendszer, ami kommunikációt létesít a felhasználó és a program között. Ez azt jelenti, hogy a perifériákról beviszi az adatot a programba miközben fut. Az I/O-nak van egy központja melyet állománynak nevezünk. Logikai állománynak a névvel rendelkező programozási eszközöket nevezzük ezek rendelkeznek attribútumokkal az állományjellemzés céljából. Fizikai állomány célja, hogy a perifériákon megjelenő adatot tartalmazza. Egy állomány lehet input, output, input-output állomány. Az input állomány már a feldolgozás előtt létre kell, hogy jöjjön, majd ezt beolvasva fut le a feldolgozás. Az output a feldolgozás után visszaadott érték ahova csak kiírni lehet. Az input-output egyszerre van jelen a feldolgozás előtt és után, szóval lehet írni és olvasni is, közben változhat a tartalma. A periféria és a tár közötti adatátvitel történhet két módon. Az egyik konvertálással a másik konvertálás nélkül történik. A folyamatos módú bevitelnél a perifériáról beolvasott adatsorozatot típushoz mérten megfelelően kell dekódolni. A nyevleknél van erre három eszközrendszer, ami a formátumos módú, szerkesztett módú és listázott módú adatátvitelből áll. A programon belüli állományokkal való munkához feltételekhez kell igazodnunk. Az első a deklaráció amivel megnevezzük milyen állományokkal dolgozunk. A második az összerendezés, melynek során egy fizikai állományt feleltetünk meg a logikai állománynak. Harmadikként jön az állomány megnyitás, ahol az operációs rendszer rutin ellenőrzése fut le. Az ezt követő feldolgozás a megnyitott állomány olvasását, vagy abba írását hajtja végre. A lezárásnál ugyanúgy rutinokat  aktivizál az operációsrendszer, majd lezárással megszűnik a kapcsolat. Implicit állománynak azt nevezzük, mikor a programozó közvetlenül a perifériával ír, olvas. Fortranban szeriális, szekvenciákis, ditekt állományt tud kezelni, fix rekordformátumot tud kezelni. Cobolnál mindíg van konverzió, szeriális, szekvenciális, direkt, indexelt, invertált állományszerkezetet ismert. Fix rekordformátumot kezel és lehetséges a blokkolás. PL/L-ben az összes állományszerkezetet, adatátviteli módot, rekordformátumot, blokkolási lehetőséget kezeli. Pascalban blokkolás nincs, nincs i/o, csak beépített alprogram van. C-ben az i/o nem a nyelv része, standard könyvtári függvények vannak, bináris átvitel és folyamatos  átvitel van, az i/o függvények teszik lehetővé az írás, olvasást. Az ada minden perifériát tud kezelni, i/o-t csomagokkal valósítja meg.
+</para>
+<para>
+11.hét(pici könyv): 112 113 
+A kivétel kezelés egy olyan funkció, amellyel kivételek bekövetkezése esetén megszakítást okoz a program. Ezzel az operációs rendszer helyett program vezérelt lesz a megszakítás. Egyes események figyelése letiltható, de ez annyit jelent, hogy a programi szinten ignorálja a kivételkezelést, ami problémát okozhat a program működésében.  A kivételkezelés megtalálható a PL/I és Ada nyelvben. A PL/I nyelvben a kivételkezelés úgy működik, hogy amikor a program futása közben bekövetkezik egy kivétel, a program megkeresi a kiváltó okot, megszünteti a szituációt és visszatér a program normál működéséhez. Az Ada ezzel ellentétben egy speciális szituáció bekövetkeztekor abba hagyja az adott tevékenységet és olyannal folytatja ami elkerüli a kivétel kiváltódás helyét. 
+
+</para>
+<para>
+
+</para>
+<para>
+11.hét(pici könyv 2): 38
+</para>
+
+
+    </section>        
+    <section>
+        <title>Programozás bevezetés</title>
+        <para>                
+            <citation>KERNIGHANRITCHIE</citation>
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://youtu.be/zmfT9miB-jY">https://youtu.be/zmfT9miB-jY</link>
+        </para> 
+<para>
+5. hét(k and r könyv):
+	Minden C programban egy utasítást pontosvesszővel zárunk le, kapcsos zárójellel összefogjuk őket. Egy logikai kifejezésnél igaz érték esetén az azt követő kapcsos zárójelben lévő utasítás fut le. Hamis érték esetén else után írt utasítások futnak le. A for és while ciklusok olyan függvények, amelyek egy logikai tesztelés után hajtanak végre utasításokat addig amíg a feltétel igaz. Vannak elöl és hátultesztelő ciklusok(pl: do-while). A ciklusban használhatunk kilépő parancsot is ami a break, viszont ha több ciklusból akarunk kilépni, akkor használhatunk goto utasítást.
+
+Minden utasítás leírási sorrendben fut le, viszont egy összetett utasítást is egy utasításként fog kezelni.
+</para>       
+    </section>        
+    <section>
+        <title>Programozás</title>
+        <para>                
+            <citation>BMECPP</citation>
+        </para>
+	<para>
+5. hét(BME C++):
+A C++ nyelv a továbbfejlesztett változata a C-nek. A C-ben például nincs string változó csak karaktertömb. Referenciatípus viszont egyáltalán nem deklarálható a c nyelvben csak a C++-ban. A c-ben egy függvényt neve alapján azonosítunk, ezzel ellentétben c++-ban az argumentumokkal együtt azonosítja a függvényt. C++-ban létezik változó szerinti paraméterátadás ami lehetővé teszi a műveletek elvégzését úgy hogy a változó értékét ez nem befolyásolja. 
+
+</para>
+<para>
+6. hét(BME C++)
+15-59 
+Az objektum orientáltság alapelvei rávilágítanak egy tisztább, rendezettebb és logikusabb struktúrára. Az objektum orientált adatstruktúrát osztályoknak, vagy class-oknak nevezik, ami egyfajta kategóriát definiál. Egy ilyen osztálynak lehetnek elemei, melyeket objektumnak nevezünk. Ezek szintén rendelkeznek önmeghatározó tulajdonságokkal. Egységbe zárással létre hozhatunk például koordináta rendszert szimuláló programot, ahol egy külön struktúra lehet egy pont x és y értékekkel. Ezeket a pontokat műveleti függvények segítségével is meghatározhatjuk. A struktúra adattagjai, másnéven tagváltozók a struktórára vonatkozó változókat jelentik, melyek azt jellemzik. Az adatrejtés lehetővé teszi, hogy egy struktúrán belül priváttá azaz csak azon belül láthatóvá tegyük vagy pedig publikká tegyük, ami engedi, hogy a tagváltozók és függvények más struktúrából is hozzáférhetőek legyenek. Objektumorientált programnál fontos lehet, hogy a tagváltozók szabályszerűen legyenek megadva, ezeket a tagfüggvényekkel tesztelve meg lehet oldani, de konstruktorok segítségével a tagfüggvények a létrejöttükkor saját magukat inicializálják. A destruktor az objektum esetleges megszűnésekor jön szóba, amikor erőforrás felszabadítás szükséges. Dinamikus memóriakezelésért felelősek a malloc és a free függvények, de c++-ban azonban már operátorok végzik a memóriafoglalást, mint például a new és a delete. A másolókonstruktor célja a másolás, amit az előzőkhöz hasonlóan a már megévő objektumok alapján inicializálva hoz létre. A friend függvény jogot ad globális függvényeknek egy osztályon belüli védett tagfüggvények hozzáféréséhez. Ennek létezik egy osztály verziója ami ugyan erre a célra szolgál.
+
+</para>
+<para>
+7. hét(BME C++)
+93-96 17-59 
+C-ben az operátorok feladata, hogy argumentumok műveleteit végezze el, az eredményt visszatérési értékkel kapjuk meg. Operátorok közötti prioritás szabályrendszer szerint dől el. Ha egyenrangú operátotokkal dolgozunk ajánlott zároójelek használata bizonyos helyzetekben. Az operátor és a függvény nem azonos mivel a függvény nem képes mellékhatásokra az érték szerinti paraméterátadás miatt. 
+</para>
+<para>
+8. hét(BME C++)
+217-220 223-230 
+A sablon egy olyan osztálysablon, vagy függvénysablon amelyet paraméterként használunk. Ennek az az értelme, hogy akármilyen típusú elemet lehet tárolni a sablonban. Ha például egy rendezést akarunk végrehajtani több féle típussal, akkor elég a sablon paramétereket használva tudunk akár karaktereket, egész számokat, vagy double-t is rendezni egy függvénnyel. A sablonparaméter típuson kívül lehet még típusos konstans, melyet például square függvényhez lehet hasznosítani. A square csak konstans paraméterrel működik, mivel a sablonnak a kifejtése fordítás közben történik. A square függvény használata kevesebb forítási időt igényel. Az intfifo osztályt osztálysablonná úgy lehet átalakítani, hogy template classként definiáljuk az osztályt, ezzel jelezzük a fordítónak, hogy ez nem közönséges osztály. Ezután sablonparamétert kell bevezetni. Az osztálynevek helyett osztálynév és sablonparaméterek szerepeltetését kell megvalósítani.
+</para>
+<para>
+11.hét(BME C++): 
+187-197 190pl 197pl 211pl
+
+</para>
+    </section>        
+</chapter>                

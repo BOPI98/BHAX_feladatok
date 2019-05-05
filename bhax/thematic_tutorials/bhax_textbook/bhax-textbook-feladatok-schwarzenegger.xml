@@ -1,0 +1,90 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Schwarzenegger!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        <title>Szoftmax Py MNIST</title>
+        <para>
+            Python
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://youtu.be/j7f9SkJR3oc">https://youtu.be/j7f9SkJR3oc</link>      
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/tensorflow/tensorflow/releases/tag/v0.9.0">https://github.com/tensorflow/tensorflow/releases/tag/v0.9.0</link> (/tensorflow-0.9.0/tensorflow/examples/tutorials/mnist/), <link xlink:href="https://progpater.blog.hu/2016/11/13/hello_samu_a_tensorflow-bol">https://progpater.blog.hu/2016/11/13/hello_samu_a_tensorflow-bol</link>  
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... : A program arra épül, hogy egy 28x28 képarányú képről felismer egy számot. A képen egy kézzel rajzolt alakból kell, hogy megállapítsa a program ezt a számot. A program elején importáljuk a szükséges függvényeket. Ezután a megfelelő könyvtárból meghívjuk az adatokat és definiáljuk az olvasás és main függvényt. A main függvényben létrehozzuk a "model" változóit, majd a következő részben jön a tesztelés. Az utolsó fázisban lefut a teszt és a kiiratás.
+        </para>
+    </section>        
+
+<!--
+    <section>
+        <title>Szoftmax R MNIST</title>
+        <para>
+            R            
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+    </section>        
+-->
+    
+    <section>
+        <title>Mély MNIST</title>
+        <para>
+            Python            
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/melyMNIST.py">https://github.com/BOPI98/BHAX_feladatok/blob/master/melyMNIST.py</link> 
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... : A program elején importálásra kerülnek a szükséges függvények. Ezután négy fő függvényt hozunk létre a programnak. Majd egy ötrétegű neurális hálót hozuk létre a programban. A következő részben a megadott módon kiértékeljük a bemenetet. A tanítási algoritmus megadása után végrehajtjuk lépésenként a training-et. Az utolsó részben a háló tesztelése következik.
+        </para>
+    </section>        
+<!--
+    <section>
+        <title>Deep dream</title>
+        <para>
+            Keras            
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+    </section>        
+-->                  
+    <section>
+        <title>Minecraft-MALMÖ</title>
+        <para>
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://youtu.be/bAPSu3Rndi8">https://youtu.be/bAPSu3Rndi8</link>      
+        </para>
+        <para>
+            Megoldás forrása:      <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/minecraft.py">https://github.com/BOPI98/BHAX_feladatok/blob/master/minecraft.py</link>           
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... : A MALMÖ egy olyan projekt melyen keresztül Minecraftban mesterséges inteligenciát lehet létrehozni. A program célja, hogy a karakter akadálymentesen haladjon öt percig, amit az előtte lévő blokkok vizsgálatával próbál elérni. Ezek a cselekedetek ugrásokban vagy irányváltoztatásokban nyilvánulnak meg. A program elején importálni kell a szükséges modulokat beleértve a malmö api fájlt. A missionXML string-ben meg van adva a spawnpoint, pálya generálási szabályok és hogy figyelje a körülötte lévő blokkokat. Az első ciklusban a program vár, amíg készen nem áll az irányításfogadásra, a másodikban pedig elindul a vezérlés. Itt az ugrás szükségét vizsgálja a program. A következőben a karakter váltakozva néz maga körül felderítés céljából. Ezután jön az a tesztelés, ahol eldönti, hogy melyik irányba nézzen. Ebből meg tudja határozni a program hogy mit cselekedjen.
+        </para>
+    </section>        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+</chapter>   
+

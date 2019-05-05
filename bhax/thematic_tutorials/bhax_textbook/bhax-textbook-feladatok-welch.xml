@@ -1,0 +1,121 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Welch!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        <title>Első osztályom</title>
+        <para>
+            Valósítsd meg C++-ban és Java-ban az módosított polártranszformációs algoritmust! A matek háttér 
+            teljesen irreleváns, csak annyiban érdekes, hogy az algoritmus egy számítása során két normálist
+            számol ki, az egyiket elspájzolod és egy további logikai taggal az osztályban jelzed, hogy van vagy
+            nincs eltéve kiszámolt szám.
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/polargen.cpp">https://github.com/BOPI98/BHAX_feladatok/blob/master/polargen.cpp</link>
+        </para>
+	<para>
+<link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/polargen.h">https://github.com/BOPI98/BHAX_feladatok/blob/master/polargen.h</link>
+	</para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... térj ki arra is, hogy a JDK forrásaiban a Sun programozói
+            pont úgy csinálták meg ahogyan te is, azaz az OO nemhogy nem nehéz, hanem éppen természetes neked! : A program egy headerben létrehoz egy osztályt, ami tartalmaz egy publikus Polargen részt, ami egy booleanból áll majd deklarálva van a random generátor. Ezután jön a privát bool deklaráció és a tárolt értéke doubleben. A cpp programban include-oljuk a headert és letrehozunk egy polargen alakú double-t és ebben történik meg az algoritmus.
+        </para>                
+    </section>        
+
+    <section>
+        <title>LZW</title>
+        <para>
+            Valósítsd meg C-ben az LZW algoritmus fa-építését!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/binfa.cpp">https://github.com/BOPI98/BHAX_feladatok/blob/master/binfa.cpp</link>
+        </para>
+<para>
+Magyarázat: A program abból áll, hogy bevesz bináris inputot, majd ezt kiiratja egy fa szerű rendszerben. A fa rendszere úgy működik, hogy egyenként beolvassa a karaktereket, és ha 1-es akkor jobbra hoz létre egy ugyan ilyen gyökér struktúrát. Ez a folyamat addig megy amíg be nem olvas minden karaktert. A kiiratásban be lehet járni az elemeket inorder, preorder, és posztorder sorrendben.
+</para> 
+    </section>        
+        
+    <section>
+        <title>Fabejárás</title>
+        <para>
+            Járd be az előző (inorder bejárású) fát pre- és posztorder is!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:<link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/preorder_inorder_postorder">https://github.com/BOPI98/BHAX_feladatok/blob/master/preorder_inorder_postorder</link>
+        </para>
+<para>
+Magyarázat: Ebben a forrásban le van írva a három féle bejárási módszer. A preorderben elsőnek kiiratja magát a rootot utána a bal, majd a jobb gyereket. Az inorderben előbb a bal oldalt utána a root, majd a jobb. A postorder bejárási módszer az bal oldallal kezdődik majd jobbal folytatódik és a roottal zárul.
+</para>
+    </section>        
+                        
+    <section>
+        <title>Tag a gyökér</title>
+        <para>
+            Az LZW algoritmust ültesd át egy C++ osztályba, legyen egy Tree és egy beágyazott Node
+            osztálya. A gyökér csomópont legyen kompozícióban a fával!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/lzwt.cpp">https://github.com/BOPI98/BHAX_feladatok/blob/master/lzwt.cpp</link>
+        </para>
+<para>
+A program úgy épül fel hogy egy headerből hívja meg az osztályt és úgy futtatja le a binfa algoritmust. Ez által külön külön váltztatható az alprogram.
+</para>
+    </section>        
+                
+    <section>
+        <title>Mutató a gyökér</title>
+        <para>
+            Írd át az előző forrást, hogy a gyökér csomópont ne kompozícióban, csak aggregációban legyen a 
+            fával!
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/lzw.h">https://github.com/BOPI98/BHAX_feladatok/blob/master/lzw.h</link>
+        </para>
+<para>
+</para>
+	<para>
+	A programban létre van hozva egy osztályban a mutató gyökér.
+	</para>
+    </section>                     
+
+    <section>
+        <title>Mozgató szemantika</title>
+        <para>
+            Írj az előző programhoz mozgató konstruktort és értékadást, a mozgató konstruktor legyen a mozgató
+            értékadásra alapozva!
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/BOPI98/BHAX_feladatok/blob/master/mozgato.cpp">https://github.com/BOPI98/BHAX_feladatok/blob/master/mozgato.cpp</link> 
+
+	
+        </para>
+<para>
+magyarázat: Ebben a programban a mozgatókonstruktorral úgy épül fel a program, 
+hogy mikor elindul a program akkor lemásilja a kódot és azután fut le a binfa. 
+A mozgatókonstruktor algoritmusa a binfa osztályába kerül be ahol a fa alakját veszi fel.
+A program többi része ugyan úgy működik, mint az előző feladatokban.
+</para>
+    </section>                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                
