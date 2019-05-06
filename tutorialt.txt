@@ -1,3 +1,3 @@
 tutoriáltak: Nyirtai Dávid - végtelen ciklus, bogomips, deklaráció, labdapattogtatás
 tutoráló: Nyitrai Dávid - Neurális háló, hangyaszimuláció, mozgatószematika, lisp faktoriális
-Petrus József - c törő, mandelbrot nagyító és utazó, lzw binfa, fabejárás, qt c++ életjáték, minecraft MALMÖ,
+Petrus József - c törő, mandelbrot nagyító és utazó, lzw binfa, fabejárás, qt c++ életjáték, minecraft MALMÖ, szoftmax py MNIST
