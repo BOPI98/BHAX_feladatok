@@ -1,280 +1,207 @@
-#include "lzw.h"
-#include <stdexcept>
+#include <iostream>
+#include <cstdlib>       
+#include <ctime>
+#include <string.h>
 
-//==============================================================================================
-//lzwtree
-//==============================================================================================
+#define null NULL
 
-//----------------------------------------------------------------------------------------------
-//ctors/dtors
-//lel.
-
-lzwtree::lzwtree():
-    m_At(&m_Root)
-    {};
-    
-lzwtree::~lzwtree()
+class Binfa
 {
-    iterator it=begin();
-    node* n;
-    
-    while(it)
+private:
+    class Node
     {
-        n=it.m_At;
-        ++it;
-        if(n!=&m_Root)
-            delete n;
-    }
-}
-
-//----------------------------------------------------------------------------------------------
-//Insertion
-
-void lzwtree::put_bit(bool bit)
-{
-    if(m_At->descend(bit))
-        m_At = &m_Root;
-    else
-        m_At = m_At->child(bit);
-};
-
-//----------------------------------------------------------------------------------------------
-//Parse file from stream
-//Note: the lineskipping seen in z3a7.cpp is not included
-
-size_t lzwtree::from_stream(std::istream& is)
-{
-    bool in_comment=0;
-    unsigned char b;
-    size_t read_count=0;
-    
-    while(is.read((char*)&b, sizeof(unsigned char)))
-    {
-        read_count++;
-        
-        if(b=='>')
-            in_comment=1;
-        else if(b=='\n')
-            in_comment=0;
-        else if(in_comment)
-            continue;
-        else if(b=='N')     //Why do we hate N's so much?
-            continue;
-        else
+    public:
+        Node(char c='/')
         {
-            for(size_t i=0; i<8; i++)
-            {
-                put_bit(b&0x80);
-                b<<=1;
-            }
+            this->c=c;
+            this->left = null;
+            this->right = null;
         }
-    }
-	
-	return read_count;
-}
-
-//----------------------------------------------------------------------------------------------
-//Iterators
-
-lzwtree::iterator lzwtree::begin()
-{
-    return ++iterator(&m_Root);
-}
-
-lzwtree::iterator lzwtree::end()
-{
-    return iterator(NULL);
-}
-
-//----------------------------------------------------------------------------------------------
-//Overloaded operators
-
-lzwtree& operator<<(lzwtree& tree, bool bit)
-{
-    tree.put_bit(bit);
-    return tree;
-}
-
-std::istream& operator>>(std::istream& is, lzwtree& tree)
-{
-    tree.from_stream(is);
-    return is;
-}
-
-//==============================================================================================
-//lzwtree::node
-//==============================================================================================
-
-//----------------------------------------------------------------------------------------------
-//ctors/dtors
-
-lzwtree::node::node(char val, size_t d):
-    m_Value(val),
-    m_Depth(d)
-{
-    m_Children[0]=0;
-    m_Children[1]=0;
-}
-
-/** Create child **/
-/* Returns false if child already existed 
- * i.e. returns number of nodes created
- * */
-bool lzwtree::node::descend(bool dir)
-{
-    if(m_Children[dir])
-        return 0;
-    else
-    {
-        m_Children[dir]=new node(dir, m_Depth+1);
-        return 1;
-    }
-}
-
-/** Get child **/
-lzwtree::node* lzwtree::node::child(bool dir)
-{
-    return m_Children[dir];
-}
-
-/** Get node value **/
-/* Either '/', '0' or '1' 
- * note to self: this seems a bit quirky. */
-char lzwtree::node::value() const
-{
-    switch(m_Value)
-    {
-        case '/': return '/'; 
-        case   0: return '0';
-        case   1: return '1';
-		
-		default:
-			return 0;
-    }
-}
-
-size_t lzwtree::node::depth() const
-{
-    return m_Depth;
-}
-
-bool lzwtree::node::is_leaf() const
-{
-    return (m_Children[0]==NULL && m_Children[1]==NULL);
-}
-
-//==============================================================================================
-//lzwtree::iterator
-//==============================================================================================
-
-lzwtree::iterator::iterator(node* at):
-    m_At(at),
-    m_Step(s_right)
-    {}
+        char c;
+        Node* left;
+        Node* right;
+    };
+    Node* fa;
     
-lzwtree::iterator& lzwtree::iterator::advance()
-{
-    //End iterators don't advance
-    if(m_At==NULL)
-        return *this;
-    
-    switch(m_Step)
+
+public:
+    Binfa(): fa(&gyoker)
     {
-        case s_up:
-            if(m_Visit.empty())
+
+    }
+    
+    void operator<<(char c)
+    {
+        if(c=='0')
+        {
+            if(fa->left == null)
             {
-                m_At=NULL;
-                return *this;
-            }
-            
-            //Return upper node, next time step left
-            m_At=m_Visit.top();
-            m_Visit.pop();
-            m_Step=s_left;
-            return *this;
-            
-        case s_right:
-            //Find the rightmost node
-            while(m_At->child(1))
-            {
-                m_Visit.push(m_At);
-                m_At=m_At->child(1);
-            }
-            
-            //Return current node, next time step left
-            m_Step=s_left;
-            return *this;
-            
-        case s_left:
-            if(m_At->child(0))
-            {
-                m_At=m_At->child(0);
-                m_Step=s_right;
-                return ++(*this);
+                fa->left = new Node('0');
+                fa = &gyoker;
             }
             else
             {
-                m_Step=s_up;
-                return ++(*this);
+                fa = fa->left;
             }
+        }
+        else
+        {
+            if(fa->right == null)
+            {
+                fa->right = new Node('1');
+                fa = &gyoker;
+            }
+            else
+            {
+                fa = fa->right;
+            }
+        }
     }
-	
-	//All of the enum's values are covered here, but I still get an error, so: 
-	return *this;
-}
-
-lzwtree::iterator& lzwtree::iterator::operator++()
-{
-    return advance();
-}
-
-bool lzwtree::iterator::operator!() const
-{
-    return !m_At;
-}
-
-lzwtree::iterator::operator bool() const
-{
-    return m_At;
-}
-
-bool lzwtree::iterator::operator==(const lzwtree::iterator& rhs) const
-{
-    return m_At==rhs.m_At;
-}
-
-bool lzwtree::iterator::operator!=(const lzwtree::iterator& rhs) const
-{
-    return m_At!=rhs.m_At;
-}
-
-char lzwtree::iterator::value() const
-{
-    if(!m_At){std::out_of_range e("lzwtree::iterator::value() on NULL-iterator"); throw e;}
     
-    return m_At->value();
+    void preorder(Node* elem,int depth=0)
+    {
+        if(elem==null)
+        {
+            return;
+        }
+        if(depth) 
+        {
+            char *spaces;
+            spaces =(char*) malloc(sizeof(char)*depth*2+1);
+            for(int i=0;i<depth;i+=2)
+            {
+                spaces[i]='-';
+                spaces[i+1]='-';
+            }
+            spaces[depth*2]='\0';
+
+            printf("%s%c\n",spaces,elem->c);
+        }
+        else
+        {
+            printf("%c\n",elem->c);
+        }
+        preorder(elem->left,depth+1);   
+        preorder(elem->right,depth+1);
+    }
+
+    void inorder(Node* elem,int depth=0)
+    {
+        if(elem==null)
+        {
+            return;
+        }
+        inorder(elem->left,depth+1);
+        if(depth) 
+        {
+            char *spaces;
+            spaces =(char*) malloc(sizeof(char)*depth*2+1);
+            for(int i=0;i<depth;i+=2)
+            {
+                spaces[i]='-';
+                spaces[i+1]='-';
+            }
+            spaces[depth*2]='\0';
+
+            printf("%s%c\n",spaces,elem->c);
+        }
+        else
+        {
+            printf("%c\n",elem->c);
+        }   
+        inorder(elem->right,depth+1);
+    }
+
+    void postorder(Node* elem,int depth=0)
+    {
+        if(elem==null)
+        {
+            return;
+        }
+        postorder(elem->left,depth+1);
+        postorder(elem->right,depth+1);
+        if(depth) 
+        {
+            char *spaces;
+            spaces =(char*) malloc(sizeof(char)*depth*2+1);
+            for(int i=0;i<depth;i+=2)
+            {
+                spaces[i]='-';
+                spaces[i+1]='-';
+            }
+            spaces[depth*2]='\0';
+
+            printf("%s%c\n",spaces,elem->c);
+        }
+        else
+        {
+            printf("%c\n",elem->c);
+        }   
+    }
+
+    void destroy_tree(Node* elem)
+    {
+        if(elem==null)
+        {
+            return;
+        }
+        destroy_tree(elem->left);
+        destroy_tree(elem->right);
+        if(elem->c!='/') delete elem;
+    }
+
+    Node gyoker;
+
+};
+
+void usage()
+{
+    printf("Használat: ./binfa KAPCSOLÓ\n");
+    printf("Az KAPCSOLÓ lehet:\n");
+    printf("--preorder\tA bináris fa preorder bejárása\n");
+    printf("--inorder\tA bináris fa inorder bejárása\n");
+    printf("--postorder\tA bináris fa postorder bejárása\n");
 }
 
-size_t lzwtree::iterator::depth() const
+int main(int argc, char** argv)
 {
-    if(!m_At){std::out_of_range e("lzwtree::iterator::depth() on NULL-iterator"); throw e;}
-    
-    return m_At->depth();
-}
-
-bool lzwtree::iterator::is_leaf() const
-{
-    if(!m_At){std::out_of_range e("lzwtree::iterator::is_leaf() on NULL-iterator"); throw e;}
-    
-    return m_At->is_leaf();
-}
-
-lzwtree::iterator lzwtree::iterator::left() const
-{
-    return iterator(*this).advance();
-}
-
-lzwtree::iterator lzwtree::iterator::right() const
-{
-    return iterator(*this).advance();
+    srand(time(0));
+    Binfa bfa;
+    for(int i=0;i<100;i++)
+    {
+        int x=rand()%2;
+        if(x)
+        {
+            bfa<<'1';
+        }
+        else
+        {
+            bfa<<'0';
+        }
+    }
+    if(argc == 2)
+    {
+        if(strcmp(argv[1],"--preorder")==0)
+        {
+            bfa.preorder(&bfa.gyoker);
+        }
+        else if(strcmp(argv[1],"--inorder")==0)
+        {
+            bfa.inorder(&bfa.gyoker);
+        }
+        else if(strcmp(argv[1],"--postorder")==0)
+        {
+            bfa.postorder(&bfa.gyoker);
+        }
+        else
+        {
+            usage();
+        }
+    }
+    else
+    {
+        usage();
+    }
+    bfa.destroy_tree(&bfa.gyoker);
+    return 0;
 }
