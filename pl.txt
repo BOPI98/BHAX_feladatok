@@ -1,0 +1,85 @@
+<programlisting><![CDATA[Egy példa a kivételkezelésre:
+    #include <iostream>
+    usning namespace std;
+    int main()
+    {
+      try
+      {
+        double d;
+        cout << "Enter a nonzero number: ";
+        cin >> d;
+        if(d == 0)
+        {
+         throw "The number can no be zero.";         
+        }
+        cout << "The reciprocal is: " << 1/d << endl;
+      }
+      catch (const char* exc)
+      {
+        cout << "Error! The error text is: " << exc << endl;
+      }
+      cout << "Done." << endl;
+    }        
+]]></programlisting>
+
+
+
+
+<programlisting><![CDATA[A verem visszacsévélése:
+    int main()
+    {
+     try
+     {
+       f1();
+     }
+     catch(const char* errorText)
+     {
+       cerr << errotext << endl;
+     }
+    }
+    void f1()
+    {
+      Fifo fifo; //a fifo egy általunk megírt osztály
+      f2();
+      ...
+    }    
+    void f2()
+    {
+      int i = 1;
+      throw "error1";
+    }    
+]]></programlisting> 
+
+
+
+
+<programlisting><![CDATA[Erőforrás kezelés:
+    class MessageHandler
+    {
+     public:
+        void ProcessMessage(istream& is)
+        {
+          Message *pMessage;
+          //Következő üzenet beolvasása.
+          while((pMessage = readNextMessage(is)) != NULL)
+          {
+            try
+            {
+              //Kivételt dobhat!
+              pMessage->Process();
+              // ...
+              // Ha végeztünk, felszabadítjuk a Message objektumot.
+              delete pMessage;
+            }
+            catch(...)
+            {
+              delete pMessage;
+              throw;
+            }
+          }
+        }
+     private:
+       Message* readNextMessage(istream& is)
+       {   ... }
+    };
+]]></programlisting> 
